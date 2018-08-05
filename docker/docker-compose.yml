@@ -1,0 +1,26 @@
+version: '3.0'
+
+services:
+ ui:
+  image: apatterson189/social-media:ui
+  ports:
+  - "80:80"
+  depends_on:
+    - api
+  volumes:
+   - ./data/images:/etc/nginx/html/social-media/images
+
+ api:
+  image: apatterson189/social-media:api-express
+  ports:
+  - "9000:9000"
+  depends_on:
+    - database
+  volumes:
+   - ./data/images:/var/social-media/images
+
+ database:
+  image: mongo
+  ports:
+  - "27017:27017"
+
